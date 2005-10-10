@@ -1,0 +1,14 @@
+Source: mkdesktophdicons-kanotix
+Section: kde
+Priority: extra
+Maintainer: Stefan Lippers-Hollmann <s.l-h@gmx.de>
+Build-Depends-Indep: cdbs (>= 0.4.23-1.1), build-essential, debhelper (>= 4.1.0)
+Standards-Version: 3.6.2
+
+Package: mkdesktophdicons-kanotix
+Architecture: all
+Depends: bash (>=2.05), gawk
+Provides: mkdesktophdicons-knoppix
+Conflicts: mkdesktophdicons-knoppix
+Description: Desktop device icon creator
+ Automatic KDE/GNOME Desktop harddisk icon creator for KANOTIX

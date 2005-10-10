@@ -1,0 +1,50 @@
+mkdesktophdicons-kanotix (0.5.7) unstable; urgency=low
+
+  * overhaul packaging.
+  * bump standards version.
+  * fix lintian issues.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 10 Oct 2005 16:05:59 +0200
+
+mkdesktophdicons-kanotix (0.5.6) unstable; urgency=low
+
+  * synch with Knoppix 3.8:
+    - add /dev/ub? support.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 22 Mar 2005 19:00:48 +0100
+
+mkdesktophdicons-kanotix (0.5-5) unstable; urgency=low
+
+  * Fork for Kanotix compatibility.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 21 Dec 2004 20:53:55 +0100
+
+mkdesktophdicons-knoppix (0.5-5) unstable; urgency=low
+
+  * nautilus2 bug workaround: Don't create desktop icons if gnome-session is the only session running, and no kdesktop process is present.
+
+ -- root <knopper@linuxtag.net>  Sat, 17 Jan 2004 00:05:22 +0100
+
+mkdesktophdicons-knoppix (0.5-4) unstable; urgency=low
+
+  * Gnome icon extensions for Nautilus of Gnome 2.4
+
+ -- root <knopper@linuxtag.net>  Tue, 13 Jan 2004 22:24:43 +0100
+
+mkdesktophdicons-knoppix (0.5-3) unstable; urgency=low
+
+  * Some NL translations
+
+ -- root <knopper@linuxtag.net>  Tue,  1 Apr 2003 00:28:48 +0200
+
+mkdesktophdicons-knoppix (0.5-2) unstable; urgency=low
+
+  * Replaced cdbakeoven by k3b as default CD writing application
+
+ -- root <knopper@linuxtag.net>  Thu,  2 Jan 2003 00:03:10 +0100
+
+mkdesktophdicons-knoppix (0.5-1) unstable; urgency=low
+
+  * Initial release
+
+ -- root <knopper@linuxtag.net>  Tue, 26 Nov 2002 23:18:18 +0100

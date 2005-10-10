@@ -1,0 +1,124 @@
+#!/bin/bash
+# (C) Klaus Knopper Nov 2002
+# Recreate desktop icons for CD-Roms and harddisks in KDE and GNOME
+# This script must be run as the logged in user.
+
+scan=""
+verbose=""
+for i in "$@"; do
+case "$i" in
+-s*) scan="true" ;; 
+-v*) verbose="-v" ;;
+*)  echo "Usage: $0 -s[can] -v[erbose]" >&2 ;;
+esac
+done
+
+# rebuildfstab requires root privileges, calls su if necessary
+[ -n "$scan" ] && rebuildfstab -r $verbose
+
+# GNOME's nautilus 2 does not know how to handle icons of Type=FSDevice yet,
+# so exit if the _only_ session on this computer is currently a gnome-session,
+# and no KDE is running.
+# This is a terrible workaround.
+
+PSAX="$(ps ax)"
+case "$PSAX" in *nautilus*) case "$PSAX" in *\ kwin*) ;; *) exit 0 ;; esac ;; esac
+
+
+# KDE desktop
+if [ ! -d $HOME/Desktop ]; then
+ mkdir -p $HOME/Desktop
+else
+ rm -f $HOME/Desktop/cdrom?* $HOME/Desktop/[hs]d[a-z][1-9]* $HOME/Desktop/ub[a-z][1-9]* 2>/dev/null
+fi
+
+# GNOME desktop 
+# .gnome-desktop is obsolete, uses same Desktop directory as KDE now.
+
+# CD/DVD-Roms/Writers
+for i in `awk -F: '/^cdrom/{print $NF}' /etc/auto.mnt`
+do
+d=${i##*/}
+cat >$HOME/Desktop/"CD-ROM [$d]" <<ENDCDROM
+[Desktop Entry]
+MountPoint=/mnt/auto/$d
+Actions=DVD;Music;Burn;Eject
+Dev=$i
+Name=CD-ROM [$d]
+Icon=cdrom_unmount
+Type=Link
+URL=/mnt/$d
+Comment=File System Device
+Comment[pl]=Urz±dzenie
+Comment[pt]=Dispositivo com Sistema de Ficheiros
+Comment[fi]=Tiedostosysteemi
+Comment[fr]=Périphérique avec système de fichiers
+Comment[it]=Dispositivo con  Sistema File
+Comment[de]=Dateisystem
+
+[Desktop Action Eject]
+Icon=player_eject
+Exec=kdeeject %v;true
+Name=Eject
+Name[de]=Auswerfen
+Dev=$i
+MountPoint=/mnt/auto/$d
+
+[Desktop Action DVD]
+Icon=video
+Exec=playvideodisk xine $i;true
+Name=DVD/VCD-Player
+Name[de]=DVD/Video-CD abspielen
+Dev=$i
+MountPoint=/mnt/auto/$d
+
+[Desktop Action Burn]
+Icon=k3b
+Exec=k3b %i %m -caption "%c";true
+Name=Create CD/CDRW
+Name[de]=CD-R/RW brennen
+Dev=$i
+MountPoint=/mnt/auto/$d
+
+[Desktop Action Music]
+Icon=xmms
+Exec=xmms $i;true
+Name=Play Music CD
+Name[de]=Musik-CD abspielen
+Dev=$i
+MountPoint=/mnt/auto/$d
+ENDCDROM
+done
+
+# HD partitions (except swap)
+while read p m t relax; do
+ case "$t" in swap) continue ;; esac
+ case "$p" in /dev/[hs]d[a-z][1-9]*|/dev/ub[a-z][1-9]*)
+  d="${p##*/}"
+  cat >$HOME/Desktop/"$d" <<ENDHD
+[Desktop Entry]
+Actions=Remount
+Type=FSDevice
+Dev=$p
+MountPoint=$m
+FSType=auto
+ReadOnly=1
+Icon=hdd_mount
+UnmountIcon=hdd_unmount
+Name=Hard Disk Partition [$d]
+Name[nl]=Harde Schijf Partitie [$d]
+Name[es]=Partición del disco duro [$d]
+
+[Desktop Action Remount]
+Icon=hdd_mount
+Exec=remountrw $p;true
+Name=Change read/write mode
+Name[nl]=Lezen/Schrijven toepassen
+Name[de]=Lese-/Schreibmodus ändern
+Name[es]=Cambiar modo lectura/escritura
+ENDHD
+  ;;
+ esac
+done </etc/fstab
+
+exit 0
