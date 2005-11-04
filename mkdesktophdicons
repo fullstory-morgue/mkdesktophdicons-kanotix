@@ -41,13 +41,13 @@ do
 d=${i##*/}
 cat >$HOME/Desktop/"CD-ROM [$d]" <<ENDCDROM
 [Desktop Entry]
-MountPoint=/mnt/auto/$d
+MountPoint=/media/auto/$d
 Actions=DVD;Music;Burn;Eject
 Dev=$i
 Name=CD-ROM [$d]
 Icon=cdrom_unmount
 Type=Link
-URL=/mnt/$d
+URL=/media/$d
 Comment=File System Device
 Comment[pl]=Urz±dzenie
 Comment[pt]=Dispositivo com Sistema de Ficheiros
@@ -62,7 +62,7 @@ Exec=kdeeject %v;true
 Name=Eject
 Name[de]=Auswerfen
 Dev=$i
-MountPoint=/mnt/auto/$d
+MountPoint=/media/auto/$d
 
 [Desktop Action DVD]
 Icon=video
@@ -70,7 +70,7 @@ Exec=playvideodisk xine $i;true
 Name=DVD/VCD-Player
 Name[de]=DVD/Video-CD abspielen
 Dev=$i
-MountPoint=/mnt/auto/$d
+MountPoint=/media/auto/$d
 
 [Desktop Action Burn]
 Icon=k3b
@@ -78,7 +78,7 @@ Exec=k3b %i %m -caption "%c";true
 Name=Create CD/CDRW
 Name[de]=CD-R/RW brennen
 Dev=$i
-MountPoint=/mnt/auto/$d
+MountPoint=/media/auto/$d
 
 [Desktop Action Music]
 Icon=xmms
@@ -86,7 +86,7 @@ Exec=xmms $i;true
 Name=Play Music CD
 Name[de]=Musik-CD abspielen
 Dev=$i
-MountPoint=/mnt/auto/$d
+MountPoint=/media/auto/$d
 ENDCDROM
 done
 
