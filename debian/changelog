@@ -1,8 +1,18 @@
-mkdesktophdicons-kanotix (0.5.9) UNRELEASED; urgency=low
+mkdesktophdicons-kanotix (0.5.9) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * synch with mkdesktophdicons-knoppix 0.5-11, changed by Klaus Knopper
+    <knopper@knopper.net>:
+    - With english locales, a harddisk should not be named "Festplatte".
+    - Also create icons for entire disks that have no partitions (i.e. some
+      ZIP and some USB floppy drives).
+    - Make icon descripions shorter to fit KDE 3.4.x abbreviated style.
+    - Change icon type for SCSI disks to match USB devices.
+    - Change icons for USB sticks.
+    - Add /dev/ub* to list of scanned devices.
+  * bump compat level to 5.
+  * remove virtual knoppix packages.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri,  4 Nov 2005 18:51:30 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 13 Dec 2005 10:36:37 +0100
 
 mkdesktophdicons-kanotix (0.5.8) unstable; urgency=low
 

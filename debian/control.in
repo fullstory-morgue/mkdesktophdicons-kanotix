@@ -8,7 +8,5 @@ Standards-Version: 3.6.2
 Package: mkdesktophdicons-kanotix
 Architecture: all
 Depends: bash (>=2.05), gawk
-Provides: mkdesktophdicons-knoppix
-Conflicts: mkdesktophdicons-knoppix
 Description: Desktop device icon creator
  Automatic KDE/GNOME Desktop harddisk icon creator for KANOTIX

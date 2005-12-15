@@ -6,11 +6,11 @@
 scan=""
 verbose=""
 for i in "$@"; do
-case "$i" in
--s*) scan="true" ;; 
--v*) verbose="-v" ;;
-*)  echo "Usage: $0 -s[can] -v[erbose]" >&2 ;;
-esac
+	case "$i" in
+		-s*) scan="true" ;; 
+		-v*) verbose="-v" ;;
+		*)  echo "Usage: $0 -s[can] -v[erbose]" >&2 ;;
+	esac
 done
 
 # rebuildfstab requires root privileges, calls su if necessary
@@ -27,17 +27,13 @@ case "$PSAX" in *nautilus*) case "$PSAX" in *\ kwin*) ;; *) exit 0 ;; esac ;; es
 
 # KDE desktop
 if [ ! -d $HOME/Desktop ]; then
- mkdir -p $HOME/Desktop
+	mkdir -p $HOME/Desktop
 else
- rm -f $HOME/Desktop/cdrom?* $HOME/Desktop/[hs]d[a-z][1-9]* $HOME/Desktop/ub[a-z][1-9]* 2>/dev/null
+	rm -f $HOME/Desktop/cdrom?* $HOME/Desktop/[hs]d[a-z]* $HOME/Desktop/ub[a-z]* 2>/dev/null
 fi
 
-# GNOME desktop 
-# .gnome-desktop is obsolete, uses same Desktop directory as KDE now.
-
 # CD/DVD-Roms/Writers
-for i in `awk -F: '/^cdrom/{print $NF}' /etc/auto.mnt`
-do
+for i in `awk -F: '/^cdrom/{print $NF}' /etc/auto.mnt`; do
 d=${i##*/}
 cat >$HOME/Desktop/"CD-ROM [$d]" <<ENDCDROM
 [Desktop Entry]
@@ -93,8 +89,10 @@ done
 # HD partitions (except swap)
 while read p m t relax; do
  case "$t" in swap) continue ;; esac
- case "$p" in /dev/[hs]d[a-z][1-9]*|/dev/ub[a-z][1-9]*)
+ case "$p" in /dev/[hs]d[a-z]*|/dev/ub[a-z]*)
   d="${p##*/}"
+  icon="hdd"
+  case "$d" in ub*|sd*) icon="usbpendrive";; esac
   cat >$HOME/Desktop/"$d" <<ENDHD
 [Desktop Entry]
 Actions=Remount
@@ -103,11 +101,14 @@ Dev=$p
 MountPoint=$m
 FSType=auto
 ReadOnly=1
-Icon=hdd_mount
-UnmountIcon=hdd_unmount
-Name=Hard Disk Partition [$d]
-Name[nl]=Harde Schijf Partitie [$d]
-Name[es]=Partición del disco duro [$d]
+Icon=${icon}_mount
+UnmountIcon=${icon}_unmount
+Name=Hard Disk [$d]
+Name[de]=Festplatte [$d]
+Name[at]=Festplatte [$d]
+Name[ch]=Festplatte [$d]
+Name[nl]=Harde Schijf [$d]
+Name[es]=Disco duro [$d]
 
 [Desktop Action Remount]
 Icon=hdd_mount
