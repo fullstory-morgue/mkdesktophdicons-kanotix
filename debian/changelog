@@ -1,8 +1,9 @@
 mkdesktophdicons-kanotix (0.5.10) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
+  * orphan package.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 15 Dec 2005 11:16:42 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 20 Dec 2005 09:37:33 +0100
 
 mkdesktophdicons-kanotix (0.5.9) unstable; urgency=low
 
