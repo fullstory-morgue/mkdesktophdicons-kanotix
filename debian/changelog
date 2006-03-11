@@ -1,9 +1,11 @@
-mkdesktophdicons-kanotix (0.5.10) UNRELEASED; urgency=low
+mkdesktophdicons-kanotix (0.5.10) unstable; urgency=low
 
   * NOT RELEASED YET
   * orphan package.
+  * remove cdbs auto-update feature.
+  * bump compat level to 5.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 20 Dec 2005 09:37:33 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 11 Mar 2006 23:48:44 +0100
 
 mkdesktophdicons-kanotix (0.5.9) unstable; urgency=low
 
